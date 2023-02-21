@@ -62,4 +62,11 @@ Route::group([
 ], function () {
     Route::get('/kuliner', 'KulinerController@index');
     Route::get('/kuliner/{id}', 'KulinerController@show');
+    Route::get('/produk', 'ProdukController@index');
+    Route::get('/produk/{id}', 'ProdukController@show');
+    Route::post('/produk', 'ProdukController@store');
+    Route::put('/produk/{id}', 'ProdukController@update');
+    Route::delete('/produk/{id}', 'ProdukController@destroy');
+
+
 });
