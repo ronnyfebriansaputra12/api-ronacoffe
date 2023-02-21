@@ -17,7 +17,6 @@ class CreateInventoriesTable extends Migration
             $table->id();
             $table->string('kd_barang', 50);
             $table->string('nama_barang', 50);
-            $table->string('jenis_barang', 50);
             $table->integer('stok');
             $table->double('harga', 8, 2);
             $table->string('satuan', 100);

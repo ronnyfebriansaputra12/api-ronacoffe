@@ -65,7 +65,6 @@ class InventoryController extends Controller
         $validate = $request->validate([
             'kd_barang' => 'required',
             'nama_barang' => 'required',
-            'jenis_barang' => 'required',
             'stok' => 'required',
             'harga' => 'required',
             'satuan' => 'required',
