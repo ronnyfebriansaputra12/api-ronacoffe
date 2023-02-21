@@ -11,4 +11,13 @@ class Inventory extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    protected $filliable = [
+        'kd_barang',
+        'nama_barang',
+        'jenis_barang',
+        'stok',
+        'harga',
+        'satuan',
+    ];
 }

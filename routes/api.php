@@ -42,7 +42,7 @@ Route::group([
     Route::post('/verify', 'ForgotPasswordController@verifyOtp');
     Route::post('/resend', 'ForgotPasswordController@resendOtp');
     Route::post('/logout', 'AuthController@logout');
-    Route::post('/forgot', 'ForgotPasswordController@forgot');   
+    Route::post('/forgot', 'ForgotPasswordController@forgot');
     Route::get('/verifyOtp/{id}', 'ForgotPasswordController@verifyOtp');
     Route::post('/resendOtp', 'ForgotPasswordController@resendOtp');
     Route::post('reset/{id}', 'ForgotPasswordController@reset');
@@ -62,4 +62,7 @@ Route::group([
 ], function () {
     Route::get('/kuliner', 'KulinerController@index');
     Route::get('/kuliner/{id}', 'KulinerController@show');
+    Route::get('/inventory', 'InventoryController@index');
+    Route::get('/inventory/{id}', 'InventoryController@show');
+    Route::post('/inventory/{id}', 'InventoryController@store');
 });
