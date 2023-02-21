@@ -21,6 +21,7 @@ class CreateInventoriesTable extends Migration
             $table->integer('stok');
             $table->double('harga', 8, 2);
             $table->string('satuan', 100);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
