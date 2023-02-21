@@ -18,6 +18,8 @@ class CreateMenusTable extends Migration
             $table->string('nama_produk', 50);
             $table->double('harga', 8, 2);
             $table->string('gambar');
+            $table->string('deskripsi');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
