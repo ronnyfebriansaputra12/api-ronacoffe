@@ -4,6 +4,7 @@ use App\Http\Controllers\API\ForgotPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,7 +43,7 @@ Route::group([
     Route::post('/verify', 'ForgotPasswordController@verifyOtp');
     Route::post('/resend', 'ForgotPasswordController@resendOtp');
     Route::post('/logout', 'AuthController@logout');
-    Route::post('/forgot', 'ForgotPasswordController@forgot');   
+    Route::post('/forgot', 'ForgotPasswordController@forgot');
     Route::get('/verifyOtp/{id}', 'ForgotPasswordController@verifyOtp');
     Route::post('/resendOtp', 'ForgotPasswordController@resendOtp');
     Route::post('reset/{id}', 'ForgotPasswordController@reset');
@@ -67,6 +68,9 @@ Route::group([
     Route::post('/produk', 'ProdukController@store');
     Route::put('/produk/{id}', 'ProdukController@update');
     Route::delete('/produk/{id}', 'ProdukController@destroy');
-
+    Route::get('/inventory', 'InventoryController@index');
+    Route::get('/inventory/{id}', 'InventoryController@show');
+    Route::post('/inventory', 'InventoryController@store');
+    Route::delete('/inventory/{id}', 'InventoryController@destroy');
 
 });
