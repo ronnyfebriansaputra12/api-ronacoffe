@@ -94,10 +94,10 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
-            'nama_produk' => 'required|unique:produks|max:255|min:3|',
-            'harga' => 'required|numeric',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
-            'deskripsi' => 'required|max:255|min:3',
+            'nama_produk' => 'unique:produks|max:255|min:3|',
+            'harga' => 'numeric',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'deskripsi' => 'max:255|min:3',
         ]);
 
         if ($request->hasFile('gambar')) {
