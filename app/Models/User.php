@@ -13,18 +13,22 @@ class User extends Model
     protected $primaryKey = 'user_id';
 
     protected $fillable = [
-        'name',
+        'nama_user',
         'email',
-        'username',
         'avatar',
         'email_verified_at',
         'birth_date',
         'password',
-        'role_id'
+        'password_confirmation',
+        'role',
+        'posisi',
+        'no_hp',
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        'password_confirmation'
+
     ];
 
     public function scopeOfSelect($query)
@@ -59,8 +63,8 @@ class User extends Model
         return $query;
     }
 
-    public function role()
-    {
-        return $this->hasOne(Role::class, 'role_id', 'role_id');
-    }
+    // public function role()
+    // {
+    //     return $this->hasOne(Role::class, 'role_id', 'role_id');
+    // }
 }

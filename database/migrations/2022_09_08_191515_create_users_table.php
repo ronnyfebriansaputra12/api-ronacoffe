@@ -9,14 +9,15 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('user_id');
-            $table->string('name');
+            $table->string('nama_user');
             $table->string('email');
-            $table->string('username')->nullable();
             $table->string('avatar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->date('birth_date')->nullable();
+            $table->string('no_hp')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('role_id');
+            $table->string('password_confirmation');
+            $table->string('posisi')->nullable();
+            $table->enum('role', ['owner', 'admin', 'karyawan'])->default('karyawan');
             $table->softDeletes();
             $table->timestamps();
         });

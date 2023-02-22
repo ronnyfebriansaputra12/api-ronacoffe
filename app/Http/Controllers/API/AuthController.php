@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,46 +18,49 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('customers')->whereNull('deleted_at')],
-            'no_telp' => ['required'],
-            'password' => ['required', 'min:8'],
+            'nama_user' => 'required',
+            'email' => ' email|unique:users',
+            'no_telp' => 'numeric',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password|min:6',
+            'role' => 'in:owner,admin,karyawan',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
 
         if ($validator->fails()) {  
             return response()->json(['error'=>$validator->errors()], 401); 
         } 
 
-        $customer = Customer::create([
-            'name'=>$request->name,
+        $user = User::create([
+            'nama_user'=>$request->nama_user,
             'email'=>$request->email,
-            'no_telp'=>$request->no_telp,
-            'password'=>Hash::make($request->password)
+            'password'=>Hash::make($request->password),
+            'password_confirmation'=>Hash::make($request->password_confirmation),
         ]);
 
         return response()->json([
             'message' => 'Data berhasil ditambahkan',
-            'data' => $customer
+            'data' => $user
         ]);
     }
 
     public function login(Request $request)
     {
-        $customer = Customer::where('email', $request->email)->first();
-        // print_r($customer);
+        $user = User::where('email', $request->email)->first();
+        // print_r($user);
         // die();
 
-        if ($customer) {
-            if (Hash::check($request->get('password'), $customer->password)) {
-                $payload = $this->jwt($request->token, $customer);
+        if ($user) {
+            if (Hash::check($request->get('password'), $user->password)) {
+                $payload = $this->jwt($request->token, $user);
                 $token = JWT::encode($payload, env("JWT_SECRET"), 'HS256');
 
                 return $this->sendResponse(true, 'Ok', [
-                    'customerAuth' => [
-                        'customer_id' => $customer->customer_id,
-                        'name' => $customer->name,
-                        'email' => $customer->email,
-                        'no_telp' => $customer->no_telp,
+                    'UserAuth' => [
+                        'user_id' => $user->user_id,
+                        'nama_user' => $user->nama_user,
+                        'email' => $user->email,
+                        'role' => $user->role,
                     ],
                     'platform' => $request->token->platform,
                     'scope' => $payload['scope'],
@@ -83,18 +87,18 @@ class AuthController extends Controller
 
     public function profile(Request $id)
     {
-        $customer = Customer::find($id);
+        $customer = User::find($id);
         return response()->json(['message' => 'success', 'data' => $customer]);
     }
 
     public function profedit(Request $request,$id)
     {
-        $customer = Customer::where('customer_id', $id)->first();
-        if ($customer) {
-            $customer->update($request->all());
+        $user = User::where('user_id', $id)->first();
+        if ($user) {
+            $user->update($request->all());
             return response()->json([
                 'message' => "Success",
-                'data' => $customer
+                'data' => $user
             ],200);
         }
 

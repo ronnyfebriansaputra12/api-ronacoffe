@@ -11,17 +11,46 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@mailinator.com',
-            'username' => 'admin',
+
+    $data = [
+        [
+            'nama_user' => 'Administrator',
+            'email' => 'admin@gmail.com',
             'avatar' => null,
             'email_verified_at' => now(),
-            'birth_date' => now()->format('Y-m-d'),
-            'password' => Hash::make('1234'),
-            'role_id' => Role::whereName('Administrator')->first()->role_id,
+            'password' => Hash::make('admin12'),
+            'password_confirmation' => Hash::make('admin12'),
+            'posisi' => 'Administrator',
+            'role' => 'admin',
             'created_at' => now(),
             'updated_at' => now()
-        ]);
+        ],
+        [
+            'nama_user' => 'Owner',
+            'email' => 'owner@gmail.com',
+            'avatar' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('owner12'),
+            'password_confirmation' => Hash::make('owner12'),
+            'posisi' => 'owner',
+            'role' => 'owner',
+            'created_at' => now(),
+            'updated_at' => now()
+        ],
+        [
+            'nama_user' => 'karyawan',
+            'email' => 'karyawan@gmail.com',
+            'avatar' => null,
+            'email_verified_at' => now(),
+            'password' => Hash::make('karyawan12'),
+            'password_confirmation' => Hash::make('karyawan12'),
+            'posisi' => 'karyawan',
+            'role' => 'karyawan',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]
+    ];
+
+        User::insert($data);
     }
 }
