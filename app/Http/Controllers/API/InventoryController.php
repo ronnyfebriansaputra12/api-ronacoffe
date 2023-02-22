@@ -63,10 +63,10 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'kd_barang' => 'required',
-            'nama_barang' => 'required',
-            'stok' => 'required',
-            'harga' => 'required',
+            'kd_barang' => 'required|unique:inventories|max:255|min:3',
+            'nama_barang' => 'required|max:255|min:3',
+            'stok' => 'required|numeric|max:255',
+            'harga' => 'required|numeric|min:3',
             'satuan' => 'required',
         ]);
 
@@ -93,19 +93,19 @@ class InventoryController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request ->validate([
-            'kd_barang' => 'required',
-            'nama_barang' => 'required',
-            'stok'=>'required',
-            'harga'=>'required',
-            'satuan' => 'required',
+            'kd_barang' => 'max:255|min:3',
+            'nama_barang' => 'max:255|min:3',
+            'stok'=>'numeric',
+            'harga'=>'numeric',
+            'satuan' => 'max:255',
         ]);
         $result = Inventory::where('id', $id)->update($validate);
 
         return response()->json([
             'success' => true,
             'message' => 'Data Berhasil diubah',
-            'data' => $result
+            'data' => $validate
         ]);
-        # code...
+        
     }
 }
