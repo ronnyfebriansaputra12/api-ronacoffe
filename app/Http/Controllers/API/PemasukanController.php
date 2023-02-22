@@ -1,21 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Models\Pemasukan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 
 class PemasukanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+  public function index(Request $request)
     {
 
         $query = Pemasukan::query();
@@ -63,7 +58,7 @@ class PemasukanController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'pemasukan' => 'required',
+            'pemasukan' => 'required|numeric',
         ]);
 
         if($validate){
