@@ -85,9 +85,9 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function profile(Request $id)
+    public function profile(Request  $id)
     {
-        $customer = User::find($id);
+        $customer = User::find($id->auth->sub);
         return response()->json(['message' => 'success', 'data' => $customer]);
     }
 

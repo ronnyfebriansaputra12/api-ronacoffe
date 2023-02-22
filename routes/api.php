@@ -47,9 +47,9 @@ Route::group([
     Route::get('/verifyOtp/{id}', 'ForgotPasswordController@verifyOtp');
     Route::post('/resendOtp', 'ForgotPasswordController@resendOtp');
     Route::post('reset/{id}', 'ForgotPasswordController@reset');
-    Route::get('/profile', 'AuthController@profile');
-    Route::put('/profedit/{id}', 'AuthController@profedit');
+
 });
+
 
 Route::group([
     'namespace' => 'App\Http\Controllers\API'
@@ -61,6 +61,8 @@ Route::group([
     'middleware' => 'auth.customer',
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
+    Route::get('/profile', 'AuthController@profile');
+    Route::put('/profedit/{id}', 'AuthController@profedit');
     Route::get('/kuliner', 'KulinerController@index');
     Route::get('/kuliner/{id}', 'KulinerController@show');
     Route::get('/produk', 'ProdukController@index');
@@ -79,7 +81,7 @@ Route::group([
     Route::post('/pemasukan', 'PemasukanController@store');
     Route::put('/pemasukan/{id}', 'PemasukanController@update');
     Route::delete('/pemasukan/{id}', 'PemasukanController@destroy');
-    
+
 
     
 

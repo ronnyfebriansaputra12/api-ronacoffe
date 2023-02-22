@@ -26,7 +26,7 @@ class CredentialController extends Controller
             return $this->sendResponse(false, "These credentials do not match our records")->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
 
-        $payload = $this->jwt($credential);
+        $payload = $this->jwt($credential, null);
         $token = JWT::encode($payload, env('JWT_SECRET') . 'token', 'HS256');
 
         return $this->sendResponse(true, 'Token generated', [
