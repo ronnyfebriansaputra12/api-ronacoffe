@@ -62,7 +62,7 @@ class ProdukController extends Controller
             $gambar->move($destinationPath, $name);
             $validate['gambar'] = $name;
         }
-        
+
         $post = Produk::create($validate);
 
         return $this->sendResponse(true, 'Ok', $post);
@@ -113,7 +113,7 @@ class ProdukController extends Controller
 
         $produk = Produk::where('id', $id)->update($validate);
         return $this->sendResponse(true, 'Ok', $produk);
-        
+
     }
 
     /**
@@ -137,7 +137,7 @@ class ProdukController extends Controller
             return response()->json([
                 "message" => "Post not found"
             ], 404);
-        }   
+        }
 
     }
 }
