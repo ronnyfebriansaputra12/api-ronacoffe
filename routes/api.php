@@ -71,6 +71,7 @@ Route::group([
     Route::get('/inventory', 'InventoryController@index');
     Route::get('/inventory/{id}', 'InventoryController@show');
     Route::post('/inventory', 'InventoryController@store');
+    Route::put('/inventory/{id}', 'InventoryController@update');
     Route::delete('/inventory/{id}', 'InventoryController@destroy');
 
 });

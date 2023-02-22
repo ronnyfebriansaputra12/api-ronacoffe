@@ -90,4 +90,22 @@ class InventoryController extends Controller
         }
 
     }
+    public function update(Request $request, $id)
+    {
+        $validate = $request ->validate([
+            'kd_barang' => 'required',
+            'nama_barang' => 'required',
+            'stok'=>'required',
+            'harga'=>'required',
+            'satuan' => 'required',
+        ]);
+        $result = Inventory::where('id', $id)->update($validate);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil diubah',
+            'data' => $result
+        ]);
+        # code...
+    }
 }
