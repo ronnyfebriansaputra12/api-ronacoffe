@@ -62,7 +62,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
     Route::get('/profile', 'AuthController@profile');
-    Route::put('/profedit/{id}', 'AuthController@profedit');
+    Route::put('/profile/{id}', 'AuthController@profedit');
     Route::get('/kuliner', 'KulinerController@index');
     Route::get('/kuliner/{id}', 'KulinerController@show');
     Route::get('/produk', 'ProdukController@index');

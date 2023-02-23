@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use Firebase\JWT\JWT;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
@@ -93,17 +94,33 @@ class AuthController extends Controller
 
     public function profedit(Request $request,$id)
     {
-        $user = User::where('user_id', $id)->first();
-        if ($user) {
-            $user->update($request->all());
-            return response()->json([
-                'message' => "Success",
-                'data' => $user
-            ],200);
+        $validator = Validator::make($request->all(), [
+            'nama_user' => 'required',
+            'email' => ' email|unique:users',
+            'no_hp' => 'numeric',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password|min:6',
+            'role' => 'max:50',
+            'posisi' => 'max:50',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+        ]);
+
+        if ($validator->fails()) {  
+            return response()->json(['error'=>$validator->errors()], 401); 
+        } 
+
+        if ($request->hasFile('avatar')) {
+            $gambar = $request->file('avatar');
+            $name = time().'.'.$gambar->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $gambar->move($destinationPath, $name);
+
+            $data_gambar = User::findOrfail($id);
+            File::delete(public_path('images/' . $data_gambar->gambar));
+            $validate['avatar'] = $name;
         }
 
-        return response()->json([
-            'message' => "Tidak ada Customer!"
-        ], 404);
+        $produk = User::where('user_id', $id)->update($validate);
+        return $this->sendResponse(true, 'Ok', $produk);
     }
 }
