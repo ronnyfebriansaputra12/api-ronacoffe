@@ -82,8 +82,14 @@ Route::group([
     Route::put('/pemasukan/{id}', 'PemasukanController@update');
     Route::delete('/pemasukan/{id}', 'PemasukanController@destroy');
 
+    Route::get('/pengeluaran', 'PengeluaranController@index');
+    Route::get('/pengeluaran/{id}', 'PengeluaranController@show');
+    Route::post('/pengeluaran', 'PengeluaranController@store');
+    Route::put('/pengeluaran/{id}', 'PengeluaranController@update');
+    Route::delete('/pengeluaran/{id}', 'PengeluaranController@destroy');
 
-    
+
+
 
 
 });
