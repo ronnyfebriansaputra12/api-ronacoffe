@@ -94,20 +94,16 @@ class AuthController extends Controller
 
     public function profedit(Request $request,$id)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_user' => 'required',
+        $validate = $request->validate([
+            'nama_user' => 'max:50',
             'email' => ' email|unique:users',
             'no_hp' => 'numeric',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password|min:6',
+            'password' => 'min:6',
+            'password_confirmation' => 'same:password|min:6',
             'role' => 'max:50',
             'posisi' => 'max:50',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
-
-        if ($validator->fails()) {  
-            return response()->json(['error'=>$validator->errors()], 401); 
-        } 
 
         if ($request->hasFile('avatar')) {
             $gambar = $request->file('avatar');
