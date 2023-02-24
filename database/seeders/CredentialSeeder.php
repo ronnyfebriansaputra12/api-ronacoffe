@@ -20,10 +20,10 @@ class CredentialSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'client_key' => 'clientKeyBackOffice',
+                'client_key' => 'clientKeyCMS',
                 'secret_key' => Hash::make('secret'),
-                'platform' => 'Backoffice',
-                'type' => 'Backoffice',
+                'platform' => 'Cms',
+                'type' => 'Cms',
                 'created_at' => now(),
                 'updated_at' => now()
             ]
