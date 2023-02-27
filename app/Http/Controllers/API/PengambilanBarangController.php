@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Models\PengambilanBarang;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PengambilanResource;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Validator;
 
 class PengambilanBarangController extends Controller
@@ -48,23 +50,52 @@ class PengambilanBarangController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'inventori_id' => 'required',
-            'jumlah' => 'required',
-            'keterangan' => 'required',
+        // validasi input
+        $validate= $request->validate([
+            'inventori_id' => 'required|integer|exists:inventories,id',
+            'jumlah' => 'required|integer|min:1',
+            'keterangan' => 'nullable|string',
         ]);
 
-        if ($validator->fails()) {  
-            return response()->json(['error'=>$validator->errors()], 401); 
-        } 
+        $inventori = Inventory::findOrFail($validate['inventori_id']);
 
-        $pengambilanBarang = PengambilanBarang::create([
-            'inventori_id' => $request->inventori_id,
-            'jumlah' => $request->jumlah,
-            'keterangan' => $request->keterangan,
+        // validasi stok produk
+        if ($inventori->stok < $validate['jumlah']) {
+            return response()->json([
+                'message' => 'Stok produk tidak mencukupi'
+            ], 400);
+        }
+
+        // kurangi stok produk
+        $inventori->stok -= $validate['jumlah'];
+        $inventori->save();
+
+        // simpan data transaksi
+        $pengambilan = new PengambilanBarang([
+            'inventori_id' => $inventori->id,
+            'jumlah' => $validate['jumlah'],
+            'keterangan' => $validate['keterangan'],
         ]);
+
+        $pengambilan->save();
+
+        return new PengambilanResource($pengambilan);
+
+
+
+    
         
     }
+
+    // public function pengurangan(Request $request)
+    // {
+
+    //     $inventori = Inventory::all();
+    //     dd($inventori);
+
+    
+        
+    // }
 
     /**
      * Display the specified resource.

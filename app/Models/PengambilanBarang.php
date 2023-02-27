@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Inventory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class PengambilanBarang extends Model
 {
@@ -14,8 +16,8 @@ class PengambilanBarang extends Model
         'keterangan'
     ];
 
-    public function inventori()
+    public function inventory()
     {
-        return $this->belongsTo(Inventori::class);
+        return $this->belongsTo(Inventory::class, 'inventori_id', 'id');
     }
 }
