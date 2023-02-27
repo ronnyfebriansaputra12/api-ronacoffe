@@ -94,8 +94,7 @@ Route::group([
     Route::put('/pengambilan/{id}', 'PengambilanBarangController@update');
     Route::delete('/pengambilan/{id}', 'PengambilanBarangController@destroy');
 
-    Route::get('/test', 'PengambilanBarangController@pengurangan');
-
+    
 
 
 

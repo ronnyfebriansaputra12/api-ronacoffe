@@ -87,16 +87,6 @@ class PengambilanBarangController extends Controller
         
     }
 
-    // public function pengurangan(Request $request)
-    // {
-
-    //     $inventori = Inventory::all();
-    //     dd($inventori);
-
-    
-        
-    // }
-
     /**
      * Display the specified resource.
      *
