@@ -98,7 +98,7 @@ Route::group([
 
 
 Route::group([
-    // 'middleware' => 'auth.customer',
+    'middleware' => 'auth.customer',
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
     Route::get('/profile', 'AuthController@profile');

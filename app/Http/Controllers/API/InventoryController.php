@@ -18,26 +18,28 @@ class InventoryController extends Controller
     public function index(Request $request)
     {
 
-        $query = Inventory::query();
+        // $query = Inventory::query();
 
-        if ($request->has('keyword')) {
-            $query->whereRaw("nama_produk LIKE '%" . $request->get('keyword') . "%'");
-        }
+        // if ($request->has('keyword')) {
+        //     $query->whereRaw("nama_produk LIKE '%" . $request->get('keyword') . "%'");
+        // }
 
-        if ($request->has('order_by')) {
-            $query->orderBy($request->get('order_by'), $request->get('order'));
-        }
-        $query = $query->paginate((int)$request->get('limit') ?? 10);
+        // if ($request->has('order_by')) {
+        //     $query->orderBy($request->get('order_by'), $request->get('order'));
+        // }
+        // $query = $query->paginate((int)$request->get('limit') ?? 10);
 
-        $result = [
-            'items'=> $query->items(),
-            'currentPage' => $query->currentPage(),
-            'from' => $query->firstItem() ?? 0,
-            'lastPage' => $query->lastPage(),
-            'perPage' => $query->perPage(),
-            'to' => $query->lastItem() ?? 0,
-            'total' => $query->total()
-        ];
+        // $result = [
+        //     'items'=> $query->items(),
+        //     'currentPage' => $query->currentPage(),
+        //     'from' => $query->firstItem() ?? 0,
+        //     'lastPage' => $query->lastPage(),
+        //     'perPage' => $query->perPage(),
+        //     'to' => $query->lastItem() ?? 0,
+        //     'total' => $query->total()
+        // ];
+
+        $result = Inventory::all();
 
         return $this->sendResponse(true, 'Ok', $result);
 
