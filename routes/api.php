@@ -98,9 +98,10 @@ Route::group([
 
 
 Route::group([
-    'middleware' => 'auth.customer',
+    'middleware' => ['auth.customer','owner.role'],
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
+    Route::get('/listUser', 'AuthController@getAllUser');
     Route::get('/profile', 'AuthController@profile');
     Route::put('/profile/{id}', 'AuthController@profedit');
     Route::get('/kuliner', 'KulinerController@index');

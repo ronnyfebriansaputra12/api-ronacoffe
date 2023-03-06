@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'auth.backoffice' => \App\Http\Middleware\AuthBackofficeMiddleware::class,
         'auth.customer' => \App\Http\Middleware\AuthCustomerMiddleware::class,
         'auth.global' => \App\Http\Middleware\AuthGlobalMiddleware::class,
+        'owner.role' => \App\Http\Middleware\OwnerMiddleware::class,
     ];
 }

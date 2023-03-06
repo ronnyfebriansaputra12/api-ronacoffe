@@ -119,4 +119,11 @@ class AuthController extends Controller
         $produk = User::where('user_id', $id)->update($validate);
         return $this->sendResponse(true, 'Ok', $produk);
     }
+
+    public function getAllUser()
+    {
+        $user = User::all();
+        return $this->sendResponse(true, 'Ok', $user);
+
+    }
 }

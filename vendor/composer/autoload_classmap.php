@@ -40,6 +40,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Resources\\PemasukanResource' => $baseDir . '/app/Http/Resources/PemasukanResource.php',
     'App\\Http\\Resources\\PengambilanResource' => $baseDir . '/app/Http/Resources/PengambilanResource.php',
+    'App\\Models\\Absensi' => $baseDir . '/app/Models/Absensi.php',
     'App\\Models\\Credential' => $baseDir . '/app/Models/Credential.php',
     'App\\Models\\Customer' => $baseDir . '/app/Models/Customer.php',
     'App\\Models\\Inventory' => $baseDir . '/app/Models/Inventory.php',
