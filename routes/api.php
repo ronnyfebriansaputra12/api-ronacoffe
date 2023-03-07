@@ -57,45 +57,6 @@ Route::group([
     Route::post('/forgotpassword',[ForgotPasswordController::class,'forgotPassword'])->name('forgotPassword');
 });
 
-// Route::group([
-//     'middleware' => 'auth.customer',
-//     'namespace' => 'App\Http\Controllers\API'
-// ], function () {
-//     Route::get('/profile', 'AuthController@profile');
-//     Route::put('/profile/{id}', 'AuthController@profedit');
-//     Route::get('/kuliner', 'KulinerController@index');
-//     Route::get('/kuliner/{id}', 'KulinerController@show');
-//     Route::get('/produk', 'ProdukController@index');
-//     Route::get('/produk/{id}', 'ProdukController@show');
-//     Route::post('/produk', 'ProdukController@store');
-//     Route::put('/produk/{id}', 'ProdukController@update');
-//     Route::delete('/produk/{id}', 'ProdukController@destroy');
-//     Route::get('/inventory', 'InventoryController@index');
-//     Route::get('/inventory/{id}', 'InventoryController@show');
-//     Route::post('/inventory', 'InventoryController@store');
-//     Route::put('/inventory/{id}', 'InventoryController@update');
-//     Route::delete('/inventory/{id}', 'InventoryController@destroy');
-
-//     Route::get('/pemasukan', 'PemasukanController@index');
-//     Route::get('/pemasukan/{id}', 'PemasukanController@show');
-//     Route::post('/pemasukan', 'PemasukanController@store');
-//     Route::put('/pemasukan/{id}', 'PemasukanController@update');
-//     Route::delete('/pemasukan/{id}', 'PemasukanController@destroy');
-
-//     Route::get('/pengeluaran', 'PengeluaranController@index');
-//     Route::get('/pengeluaran/{id}', 'PengeluaranController@show');
-//     Route::post('/pengeluaran', 'PengeluaranController@store');
-//     Route::put('/pengeluaran/{id}', 'PengeluaranController@update');
-//     Route::delete('/pengeluaran/{id}', 'PengeluaranController@destroy');
-
-//     Route::get('/pengambilan', 'PengambilanBarangController@index');
-//     Route::get('/pengambilan/{id}', 'PengambilanBarangController@show');
-//     Route::post('/pengambilan', 'PengambilanBarangController@store');
-//     Route::put('/pengambilan/{id}', 'PengambilanBarangController@update');
-//     Route::delete('/pengambilan/{id}', 'PengambilanBarangController@destroy');
-
-// });
-
 
 Route::group([
     'middleware' => ['auth.customer','owner.role'],
@@ -104,8 +65,6 @@ Route::group([
     Route::get('/listUser', 'AuthController@getAllUser');
     Route::get('/profile', 'AuthController@profile');
     Route::put('/profile/{id}', 'AuthController@profedit');
-    Route::get('/kuliner', 'KulinerController@index');
-    Route::get('/kuliner/{id}', 'KulinerController@show');
     Route::get('/produk', 'ProdukController@index');
     Route::get('/produk/{id}', 'ProdukController@show');
     Route::post('/produk', 'ProdukController@store');
@@ -134,5 +93,14 @@ Route::group([
     Route::post('/pengambilan', 'PengambilanBarangController@store');
     Route::put('/pengambilan/{id}', 'PengambilanBarangController@update');
     Route::delete('/pengambilan/{id}', 'PengambilanBarangController@destroy');
+
+});
+
+
+Route::group([
+    'middleware' => ['auth.customer'],
+    'namespace' => 'App\Http\Controllers\API'
+], function () {
+    Route::get('/listUser', 'AuthController@getAllUser');
 
 });
