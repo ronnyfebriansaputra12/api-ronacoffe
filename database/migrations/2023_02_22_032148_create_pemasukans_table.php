@@ -16,6 +16,7 @@ class CreatePemasukansTable extends Migration
         Schema::create('pemasukans', function (Blueprint $table) {
             $table->id();
             $table->integer('pemasukan');
+            $table->date('tanggal');
             $table->softDeletes();
             $table->timestamps();
         });

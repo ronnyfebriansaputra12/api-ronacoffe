@@ -45,6 +45,15 @@ class InventoryController extends Controller
 
     }
 
+//     public function filterByWeek(Request $request)
+// {
+//     $startDate = $request->input('start_date');
+//     $endDate = $request->input('end_date');
+
+//     $sales = Inventory::whereBetween('created_at', [$startDate, $endDate])->get();
+//         return $this->sendResponse(true, 'Ok', $sales);
+// }
+
     /**
      * Display the specified resource.
      *
@@ -108,6 +117,6 @@ class InventoryController extends Controller
             'message' => 'Data Berhasil diubah',
             'data' => $validate
         ]);
-        
+
     }
 }
