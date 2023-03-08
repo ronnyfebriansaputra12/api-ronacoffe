@@ -21,7 +21,7 @@ class InventoryController extends Controller
         $query = Inventory::query();
 
         if ($request->has('keyword')) {
-            $query->whereRaw("nama_produk LIKE '%" . $request->get('keyword') . "%'");
+            $query->whereRaw("nama_barang LIKE '%" . $request->get('keyword') . "%'");
         }
 
         if ($request->has('order_by')) {
