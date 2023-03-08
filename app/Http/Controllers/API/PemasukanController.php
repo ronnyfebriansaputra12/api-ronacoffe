@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\Pemasukan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -68,14 +69,34 @@ class PemasukanController extends Controller
     {
         $validate = $request->validate([
             'pemasukan' => 'required|numeric',
-            'tanggal' => 'required|date',
+            'tanggal' => 'required',
         ]);
+
+        $validate['pemasukan'] = Date::parse($validate['pemasukan'])->format('Y-m-d');
 
         if($validate){
             $pemasukan = Pemasukan::create($request->all());
             return $this->sendResponse(true, 'Data berhasil ditambahkan', $pemasukan);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        $validate = $request ->validate([
+            'pemasukan' => 'numeric',
+            'tanggal' => 'date',
+        ]);
+        $result = Pemasukan::where('id', $id)->update($validate);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil diubah',
+            'data' => $validate
+        ]);
+
+    }
+
+
     public function destroy($id)
     {
         $post = Pemasukan::findOrfail($id);
@@ -91,18 +112,5 @@ class PemasukanController extends Controller
         }
 
     }
-    public function update(Request $request, $id)
-    {
-        $validate = $request ->validate([
-           'pemasukan' => 'numeric',
-        ]);
-        $result = Pemasukan::where('id', $id)->update($validate);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Data Berhasil diubah',
-            'data' => $validate
-        ]);
-
-    }
 }
