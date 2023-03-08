@@ -38,16 +38,6 @@ class PemasukanController extends Controller
         return $this->sendResponse(true, 'Ok', $result);
 
     }
-
-    public function filterByWeek(Request $request)
-    {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $sales = Pemasukan::whereBetween('tanggal', [$startDate, $endDate])->get();
-            return $this->sendResponse(true, 'Ok', $sales);
-    }
-
     /**
      * Display the specified resource.
      *
@@ -72,7 +62,7 @@ class PemasukanController extends Controller
             'tanggal' => 'required',
         ]);
 
-        $validate['pemasukan'] = Date::parse($validate['pemasukan'])->format('Y-m-d');
+        // $validate['pemasukan'] = Date::parse($validate['pemasukan'])->format('Y-m-d');
 
         if($validate){
             $pemasukan = Pemasukan::create($request->all());
