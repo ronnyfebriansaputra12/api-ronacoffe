@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '38fbec63999b83ee7eb4e25eabbd32b4a26aeb80',
+        'reference' => '4b55b6a94be744cab7735f44c30fc841d2839135',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -418,7 +418,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '38fbec63999b83ee7eb4e25eabbd32b4a26aeb80',
+            'reference' => '4b55b6a94be744cab7735f44c30fc841d2839135',
             'dev_requirement' => false,
         ),
         'laravel/serializable-closure' => array(
@@ -518,12 +518,12 @@
             ),
         ),
         'myclabs/deep-copy' => array(
-            'pretty_version' => '1.11.0',
-            'version' => '1.11.0.0',
+            'pretty_version' => '1.11.1',
+            'version' => '1.11.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../myclabs/deep-copy',
             'aliases' => array(),
-            'reference' => '14daed4296fae74d9e3201d2c4925d1acb7aa614',
+            'reference' => '7284c22080590fb39f2ffa3e9057f10a4ddd0e0c',
             'dev_requirement' => true,
         ),
         'namshi/jose' => array(

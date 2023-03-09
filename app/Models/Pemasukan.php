@@ -13,6 +13,7 @@ class Pemasukan extends Model
 
     protected $fillable=[
         'pemasukan',
-        'tanggal'
+        'tanggal',
+
     ];
 }

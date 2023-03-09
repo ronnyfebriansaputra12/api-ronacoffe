@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Carbon\Carbon;
 use App\Models\Pemasukan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,6 +39,36 @@ class PemasukanController extends Controller
         return $this->sendResponse(true, 'Ok', $result);
 
     }
+
+    public function filter(Request $request)
+    {
+
+        // dd($request->all());
+        $this->validate($request,[
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+        
+        $start = Carbon::parse($request->start_date);
+        $end = Carbon::parse($request->end_date);
+
+    
+        $get_all_pemasukan = Pemasukan::all()->whereBetween('tanggal', [$start, $end]);
+
+        if(! $get_all_pemasukan){
+            return response()->json([
+                'data' => null,
+                'message' => 'Data not found.',
+                'success' => false
+            ], 401);
+        }
+
+
+        return $this->sendResponse(true, 'Ok', $get_all_pemasukan);
+      
+    }
+
+
     /**
      * Display the specified resource.
      *

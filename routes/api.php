@@ -80,6 +80,7 @@ Route::group([
     Route::delete('/inventory/{id}', 'InventoryController@destroy');
 
     Route::get('/pemasukan', 'PemasukanController@index');
+    Route::post('/filter', 'PemasukanController@filter');
     Route::get('/pemasukan/{id}', 'PemasukanController@show');
     Route::post('/pemasukan', 'PemasukanController@store');
     Route::put('/pemasukan/{id}', 'PemasukanController@update');
