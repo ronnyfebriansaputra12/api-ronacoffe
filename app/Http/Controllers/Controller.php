@@ -37,7 +37,7 @@ class Controller extends BaseController
             case 'Web':
                 $payload['exp'] = time() + 60 * 60 * 24 * env('TOKEN_WEB_EXPIRE', 30);
                 break;
-            case 'Backoffice':
+            case 'Cms':
                 $payload['exp'] = time() + 60 * 60 * 24 * env('TOKEN_BACKOFFICE_EXPIRE', 30);
                 break;
             case 'Android':
