@@ -59,7 +59,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['auth.customer','owner.role'],
+    'middleware' => ['owner.role'],
     'namespace' => 'App\Http\Controllers\CMS\Manage'
 ], function () {
     Route::get('/listUser', 'AuthController@getAllUser');

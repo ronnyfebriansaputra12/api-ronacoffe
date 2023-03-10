@@ -23,6 +23,13 @@ class PemasukanController extends Controller
 
         if ($request->has('start_date') && $request->has('end_date')) {
             $query->whereBetween('tanggal', [$request->get('start_date'), $request->get('end_date')]);
+        }else{
+            return response()->json([
+                'data' => null,
+                'message' => 'Data not found.',
+                'success' => false
+            ], 401);
+
         }
 
         if ($request->has('order_by')) {
@@ -44,33 +51,27 @@ class PemasukanController extends Controller
 
     }
 
-    public function filter(Request $request)
-    {
+    // public function filter(Request $request)
+    // {
 
-        // dd($request->all());
-        $this->validate($request,[
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
+    //     // dd($request->all());
+    //     $this->validate($request,[
+    //     'start_date' => 'required|date',
+    //     'end_date' => 'required|date|after_or_equal:start_date',
+    //     ]);
         
-        $start = Carbon::parse($request->start_date);
-        $end = Carbon::parse($request->end_date);
+    //     $start = Carbon::parse($request->start_date);
+    //     $end = Carbon::parse($request->end_date);
 
     
-        $get_all_pemasukan = Pemasukan::all()->whereBetween('tanggal', [$start, $end]);
+    //     // $get_all_pemasukan = Pemasukan::all()->whereBetween('tanggal', [$start, $end]);
 
-        if(empty($get_all_pemasukan)){
-            return response()->json([
-                'data' => null,
-                'message' => 'Data not found.',
-                'success' => false
-            ], 401);
-        }
+ 
 
 
-        return $this->sendResponse(true, 'Ok', $get_all_pemasukan);
+    //     return $this->sendResponse(true, 'Ok', $get_all_pemasukan);
       
-    }
+    // }
 
 
     /**
