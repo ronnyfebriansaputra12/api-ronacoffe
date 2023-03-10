@@ -19,6 +19,10 @@ class PengeluaranController extends Controller
             $query->whereRaw("pengeluaran LIKE '%" . $request->get('keyword') . "%'");
         }
 
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('tanggal', [$request->get('start_date'), $request->get('end_date')]);
+        }
+
         if ($request->has('order_by')) {
             $query->orderBy($request->get('order_by'), $request->get('order'));
         }
@@ -59,6 +63,8 @@ class PengeluaranController extends Controller
     {
         $validate = $request->validate([
             'pengeluaran' => 'required|numeric',
+            'tanggal' => 'required',
+            'rincian' => 'required',
         ]);
 
         if($validate){
@@ -85,6 +91,8 @@ class PengeluaranController extends Controller
     {
         $validate = $request ->validate([
            'pengeluaran' => 'numeric',
+           'tanggal' => 'date',
+           'rincian' => 'string',
         ]);
         $result = Pengeluaran::where('id', $id)->update($validate);
 

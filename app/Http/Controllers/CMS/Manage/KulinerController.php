@@ -58,7 +58,7 @@ class KulinerController extends Controller
         return $this->sendResponse(true, 'Ok', $kuliner);
     }
 
-    
+
     public function store(Request $request)
     {
         // $validate = $request->validate([

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\CMS\Manage;
 
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
@@ -17,6 +17,10 @@ class PengeluaranController extends Controller
 
         if ($request->has('keyword')) {
             $query->whereRaw("pengeluaran LIKE '%" . $request->get('keyword') . "%'");
+        }
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('tanggal', [$request->get('start_date'), $request->get('end_date')]);
         }
 
         if ($request->has('order_by')) {
@@ -59,6 +63,8 @@ class PengeluaranController extends Controller
     {
         $validate = $request->validate([
             'pengeluaran' => 'required|numeric',
+            'tanggal' => 'required',
+            'rincian' => 'required',
         ]);
 
         if($validate){
@@ -85,6 +91,8 @@ class PengeluaranController extends Controller
     {
         $validate = $request ->validate([
            'pengeluaran' => 'numeric',
+           'tanggal' => 'date',
+           'rincian' => 'string',
         ]);
         $result = Pengeluaran::where('id', $id)->update($validate);
 

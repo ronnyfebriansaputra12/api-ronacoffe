@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\CMS\Manage;
 
 use Illuminate\Http\Request;
 use App\Models\PengambilanBarang;
@@ -22,6 +22,10 @@ class PengambilanBarangController extends Controller
 
         if ($request->has('keyword')) {
             $query->whereRaw("pengambilan LIKE '%" . $request->get('keyword') . "%'");
+        }
+
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('tanggal', [$request->get('start_date'), $request->get('end_date')]);
         }
 
         if ($request->has('order_by')) {
@@ -54,6 +58,7 @@ class PengambilanBarangController extends Controller
         $validate= $request->validate([
             'inventori_id' => 'required|integer|exists:inventories,id',
             'jumlah' => 'required|integer|min:1',
+            'tanggal' => 'required',
             'keterangan' => 'nullable|string',
         ]);
 
@@ -74,6 +79,7 @@ class PengambilanBarangController extends Controller
         $pengambilan = new PengambilanBarang([
             'inventori_id' => $inventori->id,
             'jumlah' => $validate['jumlah'],
+            'tanggal' => $validate['tanggal'],
             'keterangan' => $validate['keterangan'],
         ]);
 
@@ -83,8 +89,8 @@ class PengambilanBarangController extends Controller
 
 
 
-    
-        
+
+
     }
 
     /**

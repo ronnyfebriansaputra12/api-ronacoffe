@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\CMS\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
@@ -28,9 +28,9 @@ class AuthController extends Controller
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
 
-        if ($validator->fails()) {  
-            return response()->json(['error'=>$validator->errors()], 401); 
-        } 
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
 
         $user = User::create([
             'nama_user'=>$request->nama_user,

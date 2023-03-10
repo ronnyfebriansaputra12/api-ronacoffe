@@ -17,6 +17,7 @@ class CreatePengambilanBarangsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('inventori_id');
             $table->integer('jumlah');
+            $table->string('tanggal');
             $table->string('keterangan');
             $table->foreign('inventori_id')->references('id')->on('inventories')->onDelete('cascade');
             $table->timestamps();

@@ -41,7 +41,7 @@ class OwnerMiddleware
             ], 401);
         }
 
-        dd($credentials);
+        // dd($credentials);
 
         if($credentials->sub == ""){
             return response()->json([

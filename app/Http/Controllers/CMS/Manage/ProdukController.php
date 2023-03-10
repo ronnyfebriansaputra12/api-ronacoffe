@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\CMS\Manage;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;

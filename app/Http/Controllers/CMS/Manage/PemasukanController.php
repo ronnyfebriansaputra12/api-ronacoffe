@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
-
+namespace App\Http\Controllers\CMS\Manage;
 use Carbon\Carbon;
 use App\Models\Pemasukan;
 use Illuminate\Http\Request;
@@ -52,11 +51,11 @@ class PemasukanController extends Controller
         'start_date' => 'required|date',
         'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-        
+
         $start = Carbon::parse($request->start_date);
         $end = Carbon::parse($request->end_date);
 
-    
+
         $get_all_pemasukan = Pemasukan::all()->whereBetween('tanggal', [$start, $end]);
 
         if(empty($get_all_pemasukan)){
@@ -69,7 +68,7 @@ class PemasukanController extends Controller
 
 
         return $this->sendResponse(true, 'Ok', $get_all_pemasukan);
-      
+
     }
 
 

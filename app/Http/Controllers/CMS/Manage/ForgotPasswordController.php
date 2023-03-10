@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\CMS\Manage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
@@ -71,7 +71,7 @@ class ForgotPasswordController extends Controller
             return response()->json([
                 'message' => 'Your OTP is invalid please check your email OTP first'
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
-            
+
         }
     }
 
@@ -112,7 +112,7 @@ class ForgotPasswordController extends Controller
     }
 
     public function reset($customer_id, Request $request)
-    {   
+    {
 
         $validator = Validator::make($request->all(),[
             'password' =>'required',

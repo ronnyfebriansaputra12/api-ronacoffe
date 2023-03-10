@@ -14,6 +14,7 @@ class Pengeluaran extends Model
 
     protected $fillable=[
         'pengeluaran',
+        'tanggal',
 	    'rincian',
     ];
 }

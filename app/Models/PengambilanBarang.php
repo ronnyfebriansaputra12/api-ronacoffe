@@ -13,6 +13,7 @@ class PengambilanBarang extends Model
     protected $fillable = [
         'inventori_id',
         'jumlah',
+        'tanggal',
         'keterangan'
     ];
 

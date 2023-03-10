@@ -16,7 +16,8 @@ class CreatePengeluaransTable extends Migration
         Schema::create('pengeluarans', function (Blueprint $table) {
             $table->id();
             $table->integer('pengeluaran');
-	        $table->string('rincian');
+            $table->string('tanggal');
+            $table->string('rincian');
             $table->softDeletes();
             $table->timestamps();
         });

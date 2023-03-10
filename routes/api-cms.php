@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CMS\Manage\ForgotPasswordController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -11,94 +14,96 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
- */
+*/
 
- Route::group([
+Route::get('/', function () {
+    return app()->version();
+});
+
+Route::group([
+    'middleware' => 'auth.global',
+    'namespace' => 'App\Http\Controllers'
+], function () {
+    Route::post('/file-uploader', 'FileUploadController@FileUploader');
+});
+
+Route::group([
     'middleware' => 'guest',
     'namespace' => 'App\Http\Controllers'
 ], function () {
     Route::post('/token', 'CredentialController@AuthSystem');
 });
-// Route::group([
-//     'middleware' => 'token',
-//     'namespace' => 'App\Http\Controllers\CMS',
-// ], function () {
-//     Route::post('/login', 'AuthController@login');
-// });
-
-// Route::group([
-//     'middleware' => 'auth.backoffice',
-//     'namespace' => 'App\Http\Controllers\Cms',
-// ], function () {
-//     Route::get('/auth/my-privileges', 'AuthController@myPrivileges');
-// });
 
 Route::group([
-    'middleware' => 'auth.backoffice',
-    'namespace' => 'App\Http\Controllers\CMS\Manage',
-    'prefix' => 'manage/user',
-], function () {
-    Route::get('/', 'UserController@index');
-    Route::post('/', 'UserController@store');
-    Route::get('/{id}', 'UserController@show');
-    Route::put('/{id}', 'UserController@update');
-    Route::delete('/{id}', 'UserController@destroy');
-});
-
-// Route::group([
-//     'middleware' => 'auth.backoffice',
-//     'namespace' => 'App\Http\Controllers\CMS\Manage',
-//     'prefix' => 'manage/role',
-// ], function () {
-//     Route::get('/', 'RoleController@index');
-//     Route::post('/', 'RoleController@store');
-//     Route::get('/{id}', 'RoleController@show');
-//     Route::put('/{id}', 'RoleController@update');
-//     Route::delete('/{id}', 'RoleController@destroy');
-// });
-
-// Route::group([
-//     'middleware' => 'auth.backoffice',
-//     'namespace' => 'App\Http\Controllers\CMS\Manage',
-//     'prefix' => 'manage/menu-group',
-// ], function () {
-//     Route::get('/', 'MenuGroupController@index');
-//     Route::post('/', 'MenuGroupController@store');
-//     Route::get('/{id}', 'MenuGroupController@show');
-//     Route::put('/{id}', 'MenuGroupController@update');
-//     Route::delete('/{id}', 'MenuGroupController@destroy');
-// });
-
-// Route::group([
-//     'middleware' => 'auth.backoffice',
-//     'namespace' => 'App\Http\Controllers\CMS\Manage',
-//     'prefix' => 'manage/menu-item',
-// ], function () {
-//     Route::get('/', 'MenuItemController@index');
-//     Route::post('/', 'MenuItemController@store');
-//     Route::get('/{id}', 'MenuItemController@show');
-//     Route::put('/{id}', 'MenuItemController@update');
-//     Route::delete('/{id}', 'MenuItemController@destroy');
-// });
-
-Route::group([
-    'middleware' => 'auth.backoffice',
+    'middleware' => 'token',
     'namespace' => 'App\Http\Controllers\CMS\Manage'
 ], function () {
-    Route::get('/wisata', 'WisataController@index');
-    Route::post('/wisata', 'WisataController@store');
-    Route::get('/wisata/{id}', 'WisataController@show');
-    Route::put('/wisata/{id}', 'WisataController@update');
-    Route::delete('/wisata/{id}', 'WisataController@destroy');
+    Route::post('/register', 'AuthController@register');
+    Route::post('/login', 'AuthController@login');
+    Route::post('/verify', 'ForgotPasswordController@verifyOtp');
+    Route::post('/resend', 'ForgotPasswordController@resendOtp');
+    Route::post('/logout', 'AuthController@logout');
+    Route::post('/forgot', 'ForgotPasswordController@forgot');
+    Route::get('/verifyOtp/{id}', 'ForgotPasswordController@verifyOtp');
+    Route::post('/resendOtp', 'ForgotPasswordController@resendOtp');
+    Route::post('reset/{id}', 'ForgotPasswordController@reset');
+
 });
 
+
+// Route::group([
+//     'namespace' => 'App\Http\Controllers\CMS\Manage'
+// ], function () {
+//     Route::post('/forgotpassword',[ForgotPasswordController::class,'forgotPassword'])->name('forgotPassword');
+// });
+
+
 Route::group([
-    'middleware' => 'auth.backoffice',
+    'middleware' => ['auth.customer','owner.role'],
     'namespace' => 'App\Http\Controllers\CMS\Manage'
 ], function () {
-    Route::get('/kuliner', 'KulinerController@index');
-    Route::post('/kuliner', 'KulinerController@store');
-    Route::get('/kuliner/{id}', 'KulinerController@show');
-    Route::put('/kuliner/{id}', 'KulinerController@update');
-    Route::delete('/kuliner/{id}', 'KulinerController@destroy');
+    Route::get('/listUser', 'AuthController@getAllUser');
+    Route::get('/profile', 'AuthController@profile');
+    Route::put('/profile/{id}', 'AuthController@profedit');
+
+    Route::get('/produk', 'ProdukController@index');
+    Route::get('/produk/{id}', 'ProdukController@show');
+    Route::post('/produk', 'ProdukController@store');
+    Route::put('/produk/{id}', 'ProdukController@update');
+    Route::delete('/produk/{id}', 'ProdukController@destroy');
+
+    Route::get('/inventory', 'InventoryController@index');
+    Route::get('/inventory/{id}', 'InventoryController@show');
+    Route::post('/inventory', 'InventoryController@store');
+    Route::put('/inventory/{id}', 'InventoryController@update');
+    Route::delete('/inventory/{id}', 'InventoryController@destroy');
+
+    Route::get('/pemasukan', 'PemasukanController@index');
+    Route::post('/filter', 'PemasukanController@filter');
+    Route::get('/pemasukan/{id}', 'PemasukanController@show');
+    Route::post('/pemasukan', 'PemasukanController@store');
+    Route::put('/pemasukan/{id}', 'PemasukanController@update');
+    Route::delete('/pemasukan/{id}', 'PemasukanController@destroy');
+
+    Route::get('/pengeluaran', 'PengeluaranController@index');
+    Route::get('/pengeluaran/{id}', 'PengeluaranController@show');
+    Route::post('/pengeluaran', 'PengeluaranController@store');
+    Route::put('/pengeluaran/{id}', 'PengeluaranController@update');
+    Route::delete('/pengeluaran/{id}', 'PengeluaranController@destroy');
+
+    Route::get('/pengambilan', 'PengambilanBarangController@index');
+    Route::get('/pengambilan/{id}', 'PengambilanBarangController@show');
+    Route::post('/pengambilan', 'PengambilanBarangController@store');
+    Route::put('/pengambilan/{id}', 'PengambilanBarangController@update');
+    Route::delete('/pengambilan/{id}', 'PengambilanBarangController@destroy');
+
+});
+
+
+Route::group([
+    'middleware' => ['auth.customer'],
+    'namespace' => 'App\Http\Controllers\CMS\Manage'
+], function () {
+    Route::get('/listUser', 'AuthController@getAllUser');
+
 });
