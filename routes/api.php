@@ -100,9 +100,18 @@ Route::group([
 
 });
 
-
 Route::group([
     'middleware' => ['auth.customer'],
+    'namespace' => 'App\Http\Controllers\API'
+], function () {
+    Route::get('/profile', 'AuthController@profile');
+    Route::put('/profile/{id}', 'AuthController@profedit');
+
+});
+
+
+Route::group([
+    'middleware' => ['auth.customer','owner.role'],
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
     Route::get('/listUser', 'AuthController@getAllUser');

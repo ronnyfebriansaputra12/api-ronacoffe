@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PengambilanResource;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class PengambilanBarangController extends Controller
 {
@@ -101,8 +103,14 @@ class PengambilanBarangController extends Controller
      */
     public function show($id)
     {
-        //
+        $pengambilan = PengambilanBarang::find($id);
+
+        if ($pengambilan == null) {
+            return $this->sendResponse(false, 'Data not found')->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $this->sendResponse(true, 'Ok', $pengambilan);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -113,7 +121,19 @@ class PengambilanBarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate= $request->validate([
+            'inventori_id' => 'integer|exists:inventories,id',
+            'jumlah' => 'integer|min:1',
+            'tanggal' => '',
+            'keterangan' => 'nullable|string',
+        ]);
+        PengambilanBarang::where('id', $id)->update($validate);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil diubah',
+            'data' => $validate
+        ]);
     }
 
     /**
@@ -124,6 +144,16 @@ class PengambilanBarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PengambilanBarang::findOrfail($id);
+        if($post) {
+            $post->delete();
+            return response()->json([
+                "message" => "success"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "Post not found"
+            ], 404);
+        }
     }
 }

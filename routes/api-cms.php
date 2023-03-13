@@ -59,13 +59,9 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['owner.role'],
+    'middleware' => ['auth.backoffice','owner.role'],
     'namespace' => 'App\Http\Controllers\CMS\Manage'
 ], function () {
-    Route::get('/listUser', 'AuthController@getAllUser');
-    Route::get('/profile', 'AuthController@profile');
-    Route::put('/profile/{id}', 'AuthController@profedit');
-
     Route::get('/produk', 'ProdukController@index');
     Route::get('/produk/{id}', 'ProdukController@show');
     Route::post('/produk', 'ProdukController@store');
@@ -99,11 +95,14 @@ Route::group([
 
 });
 
-
 Route::group([
-    'middleware' => ['auth.customer'],
-    'namespace' => 'App\Http\Controllers\CMS\Manage'
+    'middleware' => ['auth.backoffice','owner.role'],
+    'namespace' => 'App\Http\Controllers\API\CMS\Manage'
 ], function () {
     Route::get('/listUser', 'AuthController@getAllUser');
+    Route::get('/profile', 'AuthController@profile');
+    Route::put('/profile/{id}', 'AuthController@profedit');
 
 });
+
+

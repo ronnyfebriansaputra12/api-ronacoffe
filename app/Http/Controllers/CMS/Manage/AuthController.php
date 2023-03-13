@@ -89,6 +89,7 @@ class AuthController extends Controller
     public function profile(Request  $id)
     {
         $customer = User::find($id->auth->sub);
+        dd($customer);
         return response()->json(['message' => 'success', 'data' => $customer]);
     }
 
