@@ -20,6 +20,10 @@ Route::get('/', function () {
     return app()->version();
 });
 
+
+
+
+
 Route::group([
     'middleware' => 'auth.global',
     'namespace' => 'App\Http\Controllers'
@@ -66,6 +70,7 @@ Route::group([
     Route::get('/profile', 'AuthController@profile');
     Route::put('/profile/{id}', 'AuthController@profedit');
 
+
     Route::get('/inventory', 'InventoryController@index');
     // Route::get('/inventory/filter-by-week', 'InventoryController@filterByWeek');
     Route::get('/inventory/{id}', 'InventoryController@show');
@@ -102,5 +107,17 @@ Route::group([
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
     Route::get('/listUser', 'AuthController@getAllUser');
+
+});
+
+
+Route::group([
+    'middleware' => ['auth.customer'],
+    'namespace' => 'App\Http\Controllers\API'
+], function () {
+    Route::get('/absensis', 'AbsensiController@index');
+    Route::get('/absensis', 'AbsensiController@store');
+    Route::put('/absensis/{absensi}', 'AbsensiController@update');
+
 
 });

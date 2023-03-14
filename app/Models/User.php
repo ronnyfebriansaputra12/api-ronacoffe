@@ -63,6 +63,12 @@ class User extends Model
         return $query;
     }
 
+    public function absensis()
+{
+    return $this->hasMany('App\Models\API\Absensi');
+}
+
+
     // public function role()
     // {
     //     return $this->hasOne(Role::class, 'role_id', 'role_id');
