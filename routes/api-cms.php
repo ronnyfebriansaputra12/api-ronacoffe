@@ -62,24 +62,12 @@ Route::group([
     'middleware' => ['auth.backoffice','owner.role'],
     'namespace' => 'App\Http\Controllers\CMS\Manage'
 ], function () {
-    Route::get('/produk', 'ProdukController@index');
-    Route::get('/produk/{id}', 'ProdukController@show');
-    Route::post('/produk', 'ProdukController@store');
-    Route::put('/produk/{id}', 'ProdukController@update');
-    Route::delete('/produk/{id}', 'ProdukController@destroy');
 
     Route::get('/inventory', 'InventoryController@index');
     Route::get('/inventory/{id}', 'InventoryController@show');
     Route::post('/inventory', 'InventoryController@store');
     Route::put('/inventory/{id}', 'InventoryController@update');
     Route::delete('/inventory/{id}', 'InventoryController@destroy');
-
-    Route::get('/pemasukan', 'PemasukanController@index');
-    Route::post('/filter', 'PemasukanController@filter');
-    Route::get('/pemasukan/{id}', 'PemasukanController@show');
-    Route::post('/pemasukan', 'PemasukanController@store');
-    Route::put('/pemasukan/{id}', 'PemasukanController@update');
-    Route::delete('/pemasukan/{id}', 'PemasukanController@destroy');
 
     Route::get('/pengeluaran', 'PengeluaranController@index');
     Route::get('/pengeluaran/{id}', 'PengeluaranController@show');
@@ -104,5 +92,6 @@ Route::group([
     Route::put('/profile/{id}', 'AuthController@profedit');
 
 });
+
 
 

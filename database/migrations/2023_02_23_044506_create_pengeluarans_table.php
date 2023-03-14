@@ -17,7 +17,9 @@ class CreatePengeluaransTable extends Migration
             $table->id();
             $table->integer('pengeluaran');
             $table->string('tanggal');
+            $table->integer('jumlah');
             $table->string('rincian');
+            $table->integer('total');
             $table->softDeletes();
             $table->timestamps();
         });
