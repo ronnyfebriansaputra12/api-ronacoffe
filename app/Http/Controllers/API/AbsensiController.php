@@ -12,13 +12,7 @@ class AbsensiController extends Controller
 {
     public function index($id)
     {
-
-        $absensis = Absensi::with('user')->get();
-
-        return response()->json([
-            'success' => true,
-            'data' => $absensis
-        ]);
+        echo"test";
     }
 
 

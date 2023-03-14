@@ -115,9 +115,10 @@ Route::group([
     'middleware' => ['auth.customer'],
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
-    Route::get('/absensis', 'AbsensiController@index');
-    Route::get('/absensis', 'AbsensiController@store');
-    Route::put('/absensis/{absensi}', 'AbsensiController@update');
+    Route::get('/absensi', 'AbsensiController@index');
+    Route::get('/absensi/{id}', 'AbsensiController@show');
+    Route::put('/absensi/{id}', 'AbsensiController@update');
+
 
 
 });

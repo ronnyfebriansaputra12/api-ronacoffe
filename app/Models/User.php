@@ -65,7 +65,7 @@ class User extends Model
 
     public function absensis()
 {
-    return $this->hasMany('App\Models\API\Absensi');
+    return $this->hasMany(Absensi::class, 'user_id', 'user_id');
 }
 
 
