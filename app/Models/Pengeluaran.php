@@ -16,5 +16,13 @@ class Pengeluaran extends Model
         'pengeluaran',
         'tanggal',
 	    'rincian',
+        'inventori_id',
+        'jumlah',
+        'total'
     ];
+
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class, 'inventori_id', 'id');
+    }
 }

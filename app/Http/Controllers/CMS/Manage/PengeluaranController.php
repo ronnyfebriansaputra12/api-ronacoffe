@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\CMS\Manage;
 
+use App\Models\Inventory;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PengeluaranResource;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -61,16 +63,34 @@ class PengeluaranController extends Controller
 
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'pengeluaran' => 'required|numeric',
-            'tanggal' => 'required',
-            'rincian' => 'required',
-        ]);
 
-        if($validate){
-            $pengeluaran = Pengeluaran::create($request->all());
-            return $this->sendResponse(true, 'Data berhasil ditambahkan', $pengeluaran);
+        try {
+            
+            $validate = $request->validate([
+                'pengeluaran' => 'required|numeric',
+                'tanggal' => 'required',
+                'rincian' => 'required',
+                'inventori_id' => 'required|numeric',
+                'jumlah' => 'required|numeric',
+            ]);
+
+            $inventori = Inventory::findOrFail($validate['inventori_id']);
+
+            // tambah stok produk
+            $inventori->stok += $validate['jumlah'];
+            $inventori->save();
+
+            
+            // simpan data transaksi
+            $pengeluaran = Pengeluaran::create($validate);
+            
+            return new PengeluaranResource($pengeluaran);
+
+        } catch (\Throwable $e) {
+            return $this->sendResponse(false, $e->getMessage())->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+
     }
     public function destroy($id)
     {
@@ -90,11 +110,13 @@ class PengeluaranController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request ->validate([
-           'pengeluaran' => 'numeric',
-           'tanggal' => 'date',
-           'rincian' => 'string',
+            'pengeluaran' => 'numeric',
+            'tanggal' => 'date',
+            'rincian' => 'string',
+            'inventori_id' => 'numeric',
+            'jumlah' => 'numeric',
         ]);
-        $result = Pengeluaran::where('id', $id)->update($validate);
+        Pengeluaran::where('id', $id)->update($validate);
 
         return response()->json([
             'success' => true,

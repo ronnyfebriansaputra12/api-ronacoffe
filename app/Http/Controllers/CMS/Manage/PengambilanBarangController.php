@@ -89,10 +89,6 @@ class PengambilanBarangController extends Controller
 
         return new PengambilanResource($pengambilan);
 
-
-
-
-
     }
 
     /**

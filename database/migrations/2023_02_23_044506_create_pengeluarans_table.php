@@ -17,9 +17,10 @@ class CreatePengeluaransTable extends Migration
             $table->id();
             $table->integer('pengeluaran');
             $table->string('tanggal');
+            $table->unsignedBigInteger('inventori_id');
             $table->integer('jumlah');
             $table->string('rincian');
-            $table->integer('total');
+            $table->foreign('inventori_id')->references('id')->on('inventories')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
