@@ -10,7 +10,10 @@ class Absensi extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['user_id', 'tanggal', 'keterangan'];
+
+    protected $table = 'absensis';
+
+    protected $fillable = ['id','user_id', 'tanggal', 'masuk','pulang','created_at'];
 
     public function user()
     {

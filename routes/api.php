@@ -116,8 +116,9 @@ Route::group([
     'namespace' => 'App\Http\Controllers\API'
 ], function () {
     Route::get('/absensi', 'AbsensiController@index');
-    Route::get('/absensi/{id}', 'AbsensiController@show');
-    Route::put('/absensi/{id}', 'AbsensiController@update');
+    Route::post('/absensi', 'AbsensiController@savePresensi');
+    // Route::get('/absensi/{id}', 'AbsensiController@show');
+    // Route::put('/absensi/{id}', 'AbsensiController@update');
 
 
 
