@@ -20,7 +20,7 @@ class CreateAbsensisTable extends Migration
             $table->time('masuk');
             $table->time('pulang');
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AbsensiResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Absensi;
 use Carbon\Carbon;
@@ -12,37 +13,11 @@ date_default_timezone_set("Asia/Jakarta");
 
 class AbsensiController extends Controller
 {
-    public function index(Request  $id)
-        {
+    public function index(Request $request,  $id){
 
-            $absensis = User::find($id->auth->sub);
-            // dd($absensis);
-            // $absensis = Absensi::where('user_id', Auth::user()->id)->get();
-            // dd($absensis);
-            foreach($absensis as $item) {
-                if ($item->tanggal == date('Y-m-d')) {
-                    $item->is_hari_ini = true;
-                } else {
-                    $item->is_hari_ini = false;
-                }
-                $datetime = Carbon::parse($item->tanggal)->locale('id');
-                $masuk = Carbon::parse($item->masuk)->locale('id');
-                $pulang = Carbon::parse($item->pulang)->locale('id');
+        $result = Absensi::all();
+        return AbsensiResource::collection($result);
 
-                $datetime->settings(['formatFunction' => 'translatedFormat']);
-                $masuk->settings(['formatFunction' => 'translatedFormat']);
-                $pulang->settings(['formatFunction' => 'translatedFormat']);
-
-                $item->tanggal = $datetime->format('l, j F Y');
-                $item->masuk = $masuk->format('H:i');
-                $item->pulang = $pulang->format('H:i');
-            }
-
-            return response()->json([
-                'success' => true,
-                'data' => $absensis,
-                'message' => 'Sukses menampilkan data'
-            ]);
     }
 
     function savePresensi(Request $request)
@@ -118,4 +93,5 @@ class AbsensiController extends Controller
     // {
 
     // }
-}
+
+    }
