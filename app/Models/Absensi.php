@@ -13,7 +13,7 @@ class Absensi extends Model
 
     protected $table = 'absensis';
 
-    protected $fillable = ['id','user_id', 'tanggal', 'keterangan'];
+    protected $fillable = ['id','user_id', 'tanggal', 'jam_masuk', 'jam_keluar'];
 
     public function user()
     {
