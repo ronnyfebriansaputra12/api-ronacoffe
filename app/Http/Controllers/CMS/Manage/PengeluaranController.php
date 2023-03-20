@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\CMS\Manage;
 
+use PDF;
 use App\Models\Inventory;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PengeluaranResource;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -59,6 +61,13 @@ class PengeluaranController extends Controller
         }
         return $this->sendResponse(true, 'Ok', $pengeluaran);
     }
+
+    // public function createPdf(Request $request)
+    // {
+    //     $pengeluaran = Pengeluaran::all();
+    //     $pdf = PDF::loadView('cms.manage.pengeluaran.pdf', compact('pengeluaran'));
+    //     return $pdf->download('pengeluaran.pdf');
+    // }
 
 
     public function store(Request $request)

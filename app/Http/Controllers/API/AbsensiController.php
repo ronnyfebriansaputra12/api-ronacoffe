@@ -18,7 +18,7 @@ class AbsensiController extends Controller
         $query = Absensi::query();
 
         if ($request->has('keyword')) {
-            $query->whereRaw("name_kuliner LIKE '%" . $request->get('keyword') . "%'");
+            $query->whereRaw("user_id LIKE '%" . $request->get('keyword') . "%'");
         }
 
         if ($request->has('order_by')) {

@@ -70,6 +70,7 @@ Route::group([
     Route::delete('/inventory/{id}', 'InventoryController@destroy');
 
     Route::get('/pengeluaran', 'PengeluaranController@index');
+    Route::get('/create-pdf', 'PengeluaranController@createPdf');
     Route::get('/pengeluaran/{id}', 'PengeluaranController@show');
     Route::post('/pengeluaran', 'PengeluaranController@store');
     Route::put('/pengeluaran/{id}', 'PengeluaranController@update');
