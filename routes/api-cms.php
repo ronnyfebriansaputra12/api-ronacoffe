@@ -85,11 +85,22 @@ Route::group([
 
 Route::group([
     'middleware' => ['auth.backoffice','owner.role'],
-    'namespace' => 'App\Http\Controllers\API\CMS\Manage'
+    'namespace' => 'App\Http\Controllers\CMS\Manage'
 ], function () {
     Route::get('/listUser', 'AuthController@getAllUser');
     Route::get('/profile', 'AuthController@profile');
     Route::put('/profile/{id}', 'AuthController@profedit');
+
+});
+
+Route::group([
+    'middleware' => ['auth.backoffice','owner.role'],
+    'namespace' => 'App\Http\Controllers\CMS\Manage'
+], function () {
+    Route::get('/absensi', 'AbsensiController@index');
+    Route::post('/absensi', 'AbsensiController@store');
+    Route::put('/absensi/{id}', 'AbsensiController@update');
+    Route::delete('/absensi/{id}', 'AbsensiController@destroy');
 
 });
 
