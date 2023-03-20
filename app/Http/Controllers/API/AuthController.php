@@ -42,7 +42,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Data berhasil ditambahkan',
             'data' => $user,
-            'status' => 200
+            'status_code' => 200
         ]);
     }
 
