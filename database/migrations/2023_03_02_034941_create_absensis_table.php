@@ -17,7 +17,7 @@ class CreateAbsensisTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->dateTime('jam_masuk');
-            $table->dateTime('jam_keluar');
+            $table->dateTime('jam_keluar')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
