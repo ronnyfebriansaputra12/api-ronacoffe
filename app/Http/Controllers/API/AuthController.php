@@ -41,15 +41,14 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Data berhasil ditambahkan',
-            'data' => $user
+            'data' => $user,
+            'status' => 200
         ]);
     }
 
     public function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();
-        // print_r($user);
-        // die();
 
         if ($user) {
             if (Hash::check($request->get('password'), $user->password)) {
