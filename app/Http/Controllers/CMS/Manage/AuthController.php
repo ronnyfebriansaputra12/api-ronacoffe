@@ -88,9 +88,8 @@ class AuthController extends Controller
 
     public function profile(Request  $id)
     {
-        $customer = User::find($id->auth->sub);
-        dd($customer);
-        return response()->json(['message' => 'success', 'data' => $customer]);
+        $user = User::where('user_id', $id->auth->user_id)->first();
+        return response()->json(['message' => 'success', 'data' => $user]);
     }
 
     public function profedit(Request $request,$id)

@@ -68,7 +68,9 @@ class AbsensiController extends Controller
 
     public function update($id)
     {
-        $absen = Absensi::find($id);
+        $absen = Absensi::findOrfail($id);
+        $result = $absen->jam_keluar;
+
 
         if(!$absen){
             return response()->json([
@@ -95,21 +97,21 @@ class AbsensiController extends Controller
 
         $waktu_pulang = date('H:i:s');
 
-        if ($waktu_pulang < '10:34:00') {
+        if ($waktu_pulang < '17:00:00') {
             return response()->json([
                 'success' => false,
                 'message' => 'Belum waktu nya absen pulang BROO 🤚, silahkan ambil jam 17.00'
             ]);
         }
 
-        $result = Absensi::where('user_id', $absen->user_id)->first();
-        $test = $result->jam_keluar;
-        if($test){
+
+        if($result != NULL){
             return response()->json([
                 'success' => false,
                 'message' => 'Anda sudah absen pulang hari ini'
             ]);
         }
+
         $absen->save();
         return $this->sendResponse(true, 'Terimakasih', $absen);
     }

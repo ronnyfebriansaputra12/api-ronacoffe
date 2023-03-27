@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '727bed7c09430854cbc087471756849e2bb6c1b7',
+    'reference' => 'ff14c86d65ce747439220c05579e181b3d911f07',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -472,7 +472,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '727bed7c09430854cbc087471756849e2bb6c1b7',
+      'reference' => 'ff14c86d65ce747439220c05579e181b3d911f07',
     ),
     'laravel/serializable-closure' => 
     array (
@@ -512,12 +512,12 @@
     ),
     'league/commonmark' => 
     array (
-      'pretty_version' => '2.3.9',
-      'version' => '2.3.9.0',
+      'pretty_version' => '2.4.0',
+      'version' => '2.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c1e114f74e518daca2729ea8c4bf1167038fa4b5',
+      'reference' => 'd44a24690f16b8c1808bf13b1bd54ae4c63ea048',
     ),
     'league/config' => 
     array (
@@ -875,12 +875,12 @@
     ),
     'psy/psysh' => 
     array (
-      'pretty_version' => 'v0.11.12',
-      'version' => '0.11.12.0',
+      'pretty_version' => 'v0.11.13',
+      'version' => '0.11.13.0',
       'aliases' => 
       array (
       ),
-      'reference' => '52cb7c47d403c31c0adc9bf7710fc355f93c20f7',
+      'reference' => '722317c9f5627e588788e340f29b923e58f92f54',
     ),
     'ralouphie/getallheaders' => 
     array (
