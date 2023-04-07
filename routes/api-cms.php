@@ -66,21 +66,21 @@ Route::group([
     Route::get('/inventory', 'InventoryController@index');
     Route::get('/inventory/{id}', 'InventoryController@show');
     Route::post('/inventory', 'InventoryController@store');
-    Route::put('/inventory/{id}', 'InventoryController@update');
-    Route::delete('/inventory/{id}', 'InventoryController@destroy');
+    Route::post('/inventory/update/{id}', 'InventoryController@update');
+    Route::post('/inventory/delete/{id}', 'InventoryController@destroy');
 
     Route::get('/pengeluaran', 'PengeluaranController@index');
     Route::get('/create-pdf', 'PengeluaranController@createPdf');
     Route::get('/pengeluaran/{id}', 'PengeluaranController@show');
     Route::post('/pengeluaran', 'PengeluaranController@store');
-    Route::put('/pengeluaran/{id}', 'PengeluaranController@update');
-    Route::delete('/pengeluaran/{id}', 'PengeluaranController@destroy');
+    Route::post('/pengeluaran/update/{id}', 'PengeluaranController@update');
+    Route::post('/pengeluaran/delete/{id}', 'PengeluaranController@destroy');
 
     Route::get('/pengambilan', 'PengambilanBarangController@index');
     Route::get('/pengambilan/{id}', 'PengambilanBarangController@show');
     Route::post('/pengambilan', 'PengambilanBarangController@store');
-    Route::put('/pengambilan/{id}', 'PengambilanBarangController@update');
-    Route::delete('/pengambilan/{id}', 'PengambilanBarangController@destroy');
+    Route::post('/pengambilan/update/{id}', 'PengambilanBarangController@update');
+    Route::post('/pengambilan/delete/{id}', 'PengambilanBarangController@destroy');
 
 });
 
@@ -90,7 +90,7 @@ Route::group([
 ], function () {
     Route::get('/listUser', 'AuthController@getAllUser');
     Route::get('/profile', 'AuthController@profile');
-    Route::put('/profile/{id}', 'AuthController@profedit');
+    Route::post('/profile/update/{id}', 'AuthController@profedit');
 
 });
 
@@ -100,8 +100,8 @@ Route::group([
 ], function () {
     Route::get('/absensi', 'AbsensiController@index');
     Route::post('/absensi', 'AbsensiController@store');
-    Route::put('/absensi/{id}', 'AbsensiController@update');
-    Route::delete('/absensi/{id}', 'AbsensiController@destroy');
+    Route::post('/absensi/update/{id}', 'AbsensiController@update');
+    Route::post('/absensi/delete/{id}', 'AbsensiController@destroy');
 
 });
 

@@ -37,13 +37,6 @@ class AbsensiController extends Controller
         ];
 
         return $this->sendResponse(true, 'Ok', $result);
-        // $absensis = Absensi::all();
-
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $absensis
-
-        // ])
         }
     public function store(Request $request)
     {

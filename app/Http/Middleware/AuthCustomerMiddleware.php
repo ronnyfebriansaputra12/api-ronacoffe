@@ -30,6 +30,7 @@ class AuthCustomerMiddleware
                 'success' => false
             ], 401);
         }
+        
 
         if ($credentials->type != "Customer" && $credentials->sub != "") {
             return response()->json([
