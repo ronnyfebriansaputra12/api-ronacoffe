@@ -111,11 +111,11 @@ Route::group([
 // });
 
 
-// Route::group([
-//     'middleware' => ['auth.customer'],
-//     'namespace' => 'App\Http\Controllers\API'
-// ], function () {
-//     // Route::get('/absensi', 'AbsensiController@index');
-//     Route::post('/absensi', 'AbsensiController@store');
-//     Route::put('/absensi/{id}', 'AbsensiController@update');
-// });
+Route::group([
+    'middleware' => ['auth.customer'],
+    'namespace' => 'App\Http\Controllers\API'
+], function () {
+    // Route::get('/absensi', 'AbsensiController@index');
+    Route::post('/absensi', 'AbsensiController@store');
+    Route::post('/absensi/update/{id}', 'AbsensiController@update');
+});
