@@ -126,4 +126,44 @@ class AuthController extends Controller
         return $this->sendResponse(true, 'Ok', $user);
 
     }
+
+    public function userUpdate(Request $request, $id)
+    {
+
+        $validate = $request->validate([
+            'nama_user' => 'max:50',
+            'email' => ' email|unique:users',
+            'no_hp' => 'numeric',
+            'password' => 'min:6',
+            'password_confirmation' => 'same:password|min:6',
+            'role' => 'max:50',
+            'posisi' => 'max:50',
+            'avatar' => 'max:5048',
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $gambar = $request->file('avatar');
+            $name = time().'.'.$gambar->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $gambar->move($destinationPath, $name);
+
+            $data_gambar = User::findOrfail($id);
+            File::delete(public_path('images/' . $data_gambar->gambar));
+            $validate['avatar'] = $name;
+        }
+
+        $produk = User::where('user_id', $id)->update($validate);
+        return $this->sendResponse(true, 'Ok', $produk);
+    }
+
+    public function showUser($id)
+    {
+        $user = User::find($id);
+
+        if ($user == null) {
+            return $this->sendResponse(false, 'Data not found')->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $this->sendResponse(true, 'Ok', $user);
+    }
+
 }

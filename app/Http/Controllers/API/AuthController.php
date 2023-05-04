@@ -95,7 +95,7 @@ class AuthController extends Controller
     {
         $validate = $request->validate([
             'nama_user' => 'max:50',
-            'email' => ' email|unique:users',
+            'email' => ' email',
             'no_hp' => 'numeric',
             'password' => 'min:6',
             'password_confirmation' => 'same:password|min:6',

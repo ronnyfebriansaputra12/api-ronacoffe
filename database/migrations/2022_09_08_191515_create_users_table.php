@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('password_confirmation');
             $table->string('posisi')->nullable();
-            $table->enum('role', ['owner', 'admin', 'karyawan'])->default('karyawan');
+            $table->enum('role', ['superadmin', 'admin', 'karyawan'])->default('karyawan');
             $table->softDeletes();
             $table->timestamps();
         });

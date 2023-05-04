@@ -26,14 +26,14 @@ class UserSeeder extends Seeder
             'updated_at' => now()
         ],
         [
-            'nama_user' => 'Owner',
-            'email' => 'owner@gmail.com',
+            'nama_user' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
             'avatar' => null,
             'email_verified_at' => now(),
-            'password' => Hash::make('owner12'),
-            'password_confirmation' => Hash::make('owner12'),
-            'posisi' => 'owner',
-            'role' => 'owner',
+            'password' => Hash::make('superadmin12'),
+            'password_confirmation' => Hash::make('superadmin12'),
+            'posisi' => 'superadmin',
+            'role' => 'superadmin',
             'created_at' => now(),
             'updated_at' => now()
         ],

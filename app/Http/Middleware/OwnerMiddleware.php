@@ -62,7 +62,7 @@ class OwnerMiddleware
 
         // dd($user);
 
-        if($user->role != "owner" && $user->role != "admin"){
+        if($user->role != "superadmin" && $user->role != "admin"){
             return response()->json([
                 'data' => null,
                 'message' => 'Unauthorized.',

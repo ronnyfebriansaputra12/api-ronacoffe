@@ -82,6 +82,7 @@ Route::group([
     Route::post('/pengambilan/update/{id}', 'PengambilanBarangController@update');
     Route::post('/pengambilan/delete/{id}', 'PengambilanBarangController@destroy');
 
+
 });
 
 Route::group([
@@ -91,6 +92,10 @@ Route::group([
     Route::get('/listUser', 'AuthController@getAllUser');
     Route::get('/profile', 'AuthController@profile');
     Route::post('/profile/update/{id}', 'AuthController@profedit');
+    Route::post('/user/update/{id}', 'AuthController@userUpdate');
+    Route::get('/user/{id}', 'AuthController@showUser');
+
+
 
 });
 
