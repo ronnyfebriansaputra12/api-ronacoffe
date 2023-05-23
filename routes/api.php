@@ -90,6 +90,9 @@ Route::group([
     Route::post('/pengambilan/update/{id}', 'PengambilanBarangController@update');
     Route::post('/pengambilan/delete/{id}', 'PengambilanBarangController@destroy');
 
+    Route::post('/upload', 'CloudController@upload');
+
+
 });
 
 // Route::group([
