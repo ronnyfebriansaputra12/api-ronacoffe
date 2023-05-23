@@ -21,7 +21,6 @@ class CreatePengeluaransTable extends Migration
             $table->integer('jumlah');
             $table->string('rincian');
             $table->foreign('inventori_id')->references('id')->on('inventories')->onDelete('cascade');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

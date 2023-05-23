@@ -23,7 +23,6 @@ class CreateCustomersTable extends Migration
             $table->integer('otp')->nullable();
             $table->tinyInteger('otp_verify')->default( 0);
             $table->rememberToken();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

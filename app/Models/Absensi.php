@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Absensi extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $table = 'absensis';
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class User extends Model
 {
-    use SoftDeletes;
 
     protected $primaryKey = 'user_id';
 

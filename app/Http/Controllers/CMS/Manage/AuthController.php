@@ -96,7 +96,7 @@ class AuthController extends Controller
     {
         $validate = $request->validate([
             'nama_user' => 'max:50',
-            'email' => ' email|unique:users',
+            'email' => ' email',
             'no_hp' => 'numeric',
             'password' => 'min:6',
             'password_confirmation' => 'same:password|min:6',
@@ -115,9 +115,17 @@ class AuthController extends Controller
             File::delete(public_path('images/' . $data_gambar->gambar));
             $validate['avatar'] = $name;
         }
+        $validate['password'] = Hash::make($request->password);
+        $validate['password_confirmation'] = Hash::make($request->password_confirmation);
 
         $produk = User::where('user_id', $id)->update($validate);
-        return $this->sendResponse(true, 'Ok', $produk);
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil diubah',
+            'data' => $validate
+        ]);
+
     }
 
     public function getAllUser()
@@ -127,12 +135,13 @@ class AuthController extends Controller
 
     }
 
+
     public function userUpdate(Request $request, $id)
     {
 
         $validate = $request->validate([
             'nama_user' => 'max:50',
-            'email' => ' email|unique:users',
+            'email' => ' email',
             'no_hp' => 'numeric',
             'password' => 'min:6',
             'password_confirmation' => 'same:password|min:6',
@@ -151,10 +160,14 @@ class AuthController extends Controller
             File::delete(public_path('images/' . $data_gambar->gambar));
             $validate['avatar'] = $name;
         }
+        $validate['password'] = Hash::make($request->password);
+        $validate['password_confirmation'] = Hash::make($request->password_confirmation);
 
         $produk = User::where('user_id', $id)->update($validate);
         return $this->sendResponse(true, 'Ok', $produk);
     }
+
+
 
     public function showUser($id)
     {
@@ -164,6 +177,22 @@ class AuthController extends Controller
             return $this->sendResponse(false, 'Data not found')->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $this->sendResponse(true, 'Ok', $user);
+    }
+
+    public function destroy($id)   {
+
+        $user = User::findOrfail($id);
+        if($user) {
+            $user->delete();
+            return response()->json([
+                "message" => "User telah dihapus"
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "User tidak ditemukan"
+            ], 404);
+        }
+
     }
 
 }
