@@ -83,6 +83,7 @@ Route::group([
     Route::post('/pengambilan/delete/{id}', 'PengambilanBarangController@destroy');
 
     Route::get('/cekAbsensi', 'DashboardController@cekAbsensi');
+    Route::post('/upload', 'CloudController@upload');
 
 
 });

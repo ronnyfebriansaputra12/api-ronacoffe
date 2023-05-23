@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\CMS\\AuthController' => $baseDir . '/app/Http/Controllers/CMS/AuthController.php',
     'App\\Http\\Controllers\\CMS\\Manage\\AbsensiController' => $baseDir . '/app/Http/Controllers/CMS/Manage/AbsensiController.php',
     'App\\Http\\Controllers\\CMS\\Manage\\AuthController' => $baseDir . '/app/Http/Controllers/CMS/Manage/AuthController.php',
+    'App\\Http\\Controllers\\CMS\\Manage\\CloudController' => $baseDir . '/app/Http/Controllers/CMS/Manage/CloudController.php',
     'App\\Http\\Controllers\\CMS\\Manage\\DashboardController' => $baseDir . '/app/Http/Controllers/CMS/Manage/DashboardController.php',
     'App\\Http\\Controllers\\CMS\\Manage\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/CMS/Manage/ForgotPasswordController.php',
     'App\\Http\\Controllers\\CMS\\Manage\\InventoryController' => $baseDir . '/app/Http/Controllers/CMS/Manage/InventoryController.php',

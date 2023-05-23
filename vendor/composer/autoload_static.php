@@ -35,8 +35,8 @@ class ComposerStaticInit2287180d1d3198431bda60a67ffcc023
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '746bb4ebbdf3585f3e2e85fffd4a5f43' => __DIR__ . '/..' . '/cloudinary-labs/cloudinary-laravel/src/Support/helpers.php',
+        'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -578,6 +578,7 @@ class ComposerStaticInit2287180d1d3198431bda60a67ffcc023
         'App\\Http\\Controllers\\CMS\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/AuthController.php',
         'App\\Http\\Controllers\\CMS\\Manage\\AbsensiController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/Manage/AbsensiController.php',
         'App\\Http\\Controllers\\CMS\\Manage\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/Manage/AuthController.php',
+        'App\\Http\\Controllers\\CMS\\Manage\\CloudController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/Manage/CloudController.php',
         'App\\Http\\Controllers\\CMS\\Manage\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/Manage/DashboardController.php',
         'App\\Http\\Controllers\\CMS\\Manage\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/Manage/ForgotPasswordController.php',
         'App\\Http\\Controllers\\CMS\\Manage\\InventoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CMS/Manage/InventoryController.php',
