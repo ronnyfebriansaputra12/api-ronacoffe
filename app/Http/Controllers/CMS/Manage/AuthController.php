@@ -13,6 +13,8 @@ use Firebase\JWT\JWT;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 class AuthController extends Controller
 {
@@ -150,18 +152,22 @@ class AuthController extends Controller
             'avatar' => 'max:5048',
         ]);
 
-        if ($request->hasFile('avatar')) {
-            $gambar = $request->file('avatar');
-            $name = time().'.'.$gambar->getClientOriginalExtension();
-            $destinationPath = public_path('/images');
-            $gambar->move($destinationPath, $name);
+        $imagePath = $request->file('avatar')->getRealPath();
 
-            $data_gambar = User::findOrfail($id);
-            File::delete(public_path('images/' . $data_gambar->gambar));
-            $validate['avatar'] = $name;
-        }
-        $validate['password'] = Hash::make($request->password);
-        $validate['password_confirmation'] = Hash::make($request->password_confirmation);
+        // $result = Cloudinary::upload($imagePath);
+        $result = Cloudinary::upload($imagePath, [
+            'folder' => 'avatar',
+            'transformation' => [
+                'width' => 320,
+                'height' => 320,
+                'crop' => 'limit',
+            ],
+        ]);
+
+        // Ambil URL gambar yang diunggah
+        $imageUrl = $result->getSecurePath();
+        $validate['avatar'] = $imageUrl;
+
 
         $produk = User::where('user_id', $id)->update($validate);
         return $this->sendResponse(true, 'Ok', $produk);
