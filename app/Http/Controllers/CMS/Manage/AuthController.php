@@ -140,7 +140,6 @@ class AuthController extends Controller
 
     public function userUpdate(Request $request, $id)
     {
-
         $validate = $request->validate([
             'nama_user' => 'max:50',
             'email' => ' email',
@@ -149,8 +148,9 @@ class AuthController extends Controller
             'password_confirmation' => 'same:password|min:6',
             'role' => 'max:50',
             'posisi' => 'max:50',
-            'avatar' => 'max:5048',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
+
 
         $imagePath = $request->file('avatar')->getRealPath();
 
@@ -168,9 +168,12 @@ class AuthController extends Controller
         $imageUrl = $result->getSecurePath();
         $validate['avatar'] = $imageUrl;
 
-
         $produk = User::where('user_id', $id)->update($validate);
-        return $this->sendResponse(true, 'Ok', $produk);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil diubah',
+            'data' => $produk
+        ]);
     }
 
 
