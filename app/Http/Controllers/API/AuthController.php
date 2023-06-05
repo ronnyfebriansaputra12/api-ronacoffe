@@ -95,46 +95,68 @@ class AuthController extends Controller
 
     public function profedit(Request $request,$id)
     {
+        // dd($request->password);
+
         $validate = $request->validate([
             'nama_user' => 'max:50',
             'email' => ' email',
             'no_hp' => 'numeric',
-            'password' => 'min:6',
-            'password_confirmation' => 'same:password|min:6',
+            'password' => 'min:6|nullable',
+            'password_confirmation' => 'nullable|same:password|min:6',
             'role' => 'max:50',
             'posisi' => 'max:50',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5048',
         ]);
 
-        // if ($request->hasFile('avatar')) {
-        //     $gambar = $request->file('avatar');
-        //     $name = time().'.'.$gambar->getClientOriginalExtension();
-        //     $destinationPath = public_path('/images');
-        //     $gambar->move($destinationPath, $name);
+        if($request->hasFile('avatar')){
 
-        //     $data_gambar = User::findOrfail($id);
-        //     File::delete(public_path('images/' . $data_gambar->gambar));
-        //     $validate['avatar'] = $name;
-        // }
+            $imagePath = $request->file('avatar')->getRealPath();
+            $result = Cloudinary::upload($imagePath, [
+                'folder' => 'avatar',
+                'transformation' => [
+                    'width' => 320,
+                    'height' => 320,
+                    'crop' => 'limit',
+                ],
+            ]);
+            $imageUrl = $result->getSecurePath();
+            $validate['avatar'] = $imageUrl;
 
-        $imagePath = $request->file('avatar')->getRealPath();
+                if ($request->filled('password') && $request->filled('password_confirmation')) {
+                    $validate['password'] = Hash::make($request->password);
+                    $validate['password_confirmation'] = Hash::make($request->password_confirmation);
+                } else {
+                    // Jika password tidak diubah, hapus validasi dan atribut password
+                    unset($validate['password']);
+                    unset($validate['password_confirmation']);
+                }
+                $user = User::find($id);
+                    if (!$user) {
+                        return $this->sendResponse(false, 'User not found', null);
+                    }
 
-        // $result = Cloudinary::upload($imagePath);
-        $result = Cloudinary::upload($imagePath, [
-            'folder' => 'avatar',
-            'transformation' => [
-                'width' => 320,
-                'height' => 320,
-                'crop' => 'limit',
-            ],
-        ]);
+            $produk = User::where('user_id', $id)->update($validate);
+            return $this->sendResponse(true, 'Ok', $produk);
+            
+        }
 
-        // Ambil URL gambar yang diunggah
-        $imageUrl = $result->getSecurePath();
-        $validate['avatar'] = $imageUrl;
+        if ($request->filled('password') && $request->filled('password_confirmation')) {
+            $validate['password'] = Hash::make($request->password);
+            $validate['password_confirmation'] = Hash::make($request->password_confirmation);
+        } else {
+            // Jika password tidak diubah, hapus validasi dan atribut password
+            unset($validate['password']);
+            unset($validate['password_confirmation']);
+        }
+        $user = User::find($id);
+            if (!$user) {
+                return $this->sendResponse(false, 'User not found', null);
+            }
 
         $produk = User::where('user_id', $id)->update($validate);
         return $this->sendResponse(true, 'Ok', $produk);
+
+
     }
 
     public function getAllUser()
